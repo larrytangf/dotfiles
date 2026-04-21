@@ -3,42 +3,75 @@ theme = "catppuccin_frappe"
 [editor]
 line-number = "relative"
 cursorline = true
-cursorcolumn = true
+cursorcolumn = false
 color-modes = true
 mouse = false
 bufferline = "multiple"
 trim-final-newlines = true
 trim-trailing-whitespace = true
 popup-border = "all"
+auto-completion = true
+auto-info = true
+
+# [editor.word-completion]
+# enable = true
+# trigger-length = 2
+
+[editor.soft-wrap]
+enable = true
 
 [editor.statusline]
-left = ["mode", "spinner", "file-name", "read-only-indicator", "file-modification-indicator"]
+left = [
+    "mode",
+    "spinner",
+    "file-name",
+    "read-only-indicator",
+    "file-modification-indicator"
+]
 center = ["diagnostics"]
-right = ["selections", "register", "separator", "position", "position-percentage", "total-line-numbers", "separator", "file-type", "file-indent-style", "file-encoding"]
+right = [
+    "selections",
+    "register",
+    "separator",
+    "position",
+    "position-percentage",
+    "total-line-numbers",
+    "separator",
+    "file-type",
+    "file-indent-style",
+    "file-encoding"
+]
 separator = "│"
-mode.normal = "NORMAL"
-mode.insert = "INSERT"
-mode.select = "SELECT"
+mode.normal = "NOR"
+mode.insert = "INS"
+mode.select = "SEL"
 
 [editor.indent-guides]
 render = true
 character = "⸽"
+skip-levels = 0
 
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
 select = "underline"
 
+[editor.lsp]
+display-messages = true
+display-progress-messages = true
+display-inlay-hints = true
+# display-hints-length-limit = 40
+
 [editor.file-picker]
 hidden = false
 
 [editor.whitespace.render]
 space = "none"
-tab = "all"
-nbsp = "all"
-nnbsp = "all"
-newline = "all"
-tabpad = "all"
+tab = "none"
+nbsp = "none"
+nnbsp = "none"
+newline = "none"
+tabpad = "none"
 
 [editor.whitespace.characters]
 space = "·"
@@ -49,5 +82,46 @@ newline = "⏎"
 tabpad = "·"
 
 [keys.normal]
+tab = "move_parent_node_end"
+S-tab = "move_parent_node_start"
+"\\" = ":reflow"
+"X" = ["extend_line_up", "extend_to_line_bounds"]
+"C-s" = ":write"
+"C-q" = ":quit"
+"C-j" = "save_selection"
+
+"{" = ["goto_prev_paragraph", "collapse_selection"]
+"}" = ["goto_next_paragraph", "collapse_selection"]
+0 = "goto_line_start"
+"$" = "goto_line_end"
+"^" = "goto_first_nonwhitespace"
+G = "goto_file_end"
+"%" = "match_brackets"
+
+# "C-/" = "toggle_comments"
+# "Z" = { "Z" = [":quit"] }
+"z" = { "o" = [":toggle soft-wrap.wrap-at-text-width"] }
 "*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
 "#" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_prev"]
+
+[keys.normal.space]
+"x" = ":buffer-close"
+"w" = { r = ":reload", c = ":config-reload" }
+"." = "file_picker_in_current_buffer_directory"
+"n" = "signature_help"
+
+[keys.insert]
+"C-s" = [":write", "normal_mode"]
+S-tab = "move_parent_node_start"
+
+[keys.select]
+tab = "extend_parent_node_end"
+S-tab = "extend_parent_node_start"
+
+"{" = ["goto_prev_paragraph", "collapse_selection"]
+"}" = ["goto_next_paragraph", "collapse_selection"]
+0 = "goto_line_start"
+"$" = "goto_line_end"
+"^" = "goto_first_nonwhitespace"
+G = "goto_file_end"
+"%" = "match_brackets"
